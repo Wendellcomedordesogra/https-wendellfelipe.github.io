@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wendell Felipe – Eletricista Profissional</title>
+  <meta name="description" content="Eletricista profissional em SP. Orçamento rápido, atendimento 24h, pagamento via PIX (QR Code), chat direto no WhatsApp e tabela completa de preços." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .glass{backdrop-filter:saturate(160%) blur(8px); background:rgba(255,255,255,.7)}
+    .soft-shadow{box-shadow:0 10px 30px rgba(2,6,23,.15)}
+    .ring-electric{box-shadow:0 0 0 3px rgba(16,185,129,.45)}
+    .mini-foto{ width: 92px; height: 92px; object-fit: cover; border-radius: 9999px; border: 3px solid #22c55e; box-shadow:0 6px 14px rgba(0,0,0,.25)}
+    @media (min-width: 640px){ .mini-foto{ width: 112px; height: 112px; } }
+    .pulse{ animation: pulse 2s infinite; }
+    @keyframes pulse{ 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.06); } }
+    .price-grid td, .price-grid th { border-bottom: 1px solid rgb(226 232 240); }
+    .sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 selection:bg-emerald-200/60">
+  <!-- Player YouTube oculto (Con Te Partirò) -->
+  <div class="fixed -z-10 opacity-0 pointer-events-none">
+    <iframe id="ytbg" width="560" height="315" src="https://www.youtube.com/embed/TdWEhMOrRpQ?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=TdWEhMOrRpQ" title="YouTube player" frameborder="0" allow="autoplay"></iframe>
+  </div>
+  <button id="btnSom" class="hidden fixed z-[70] bottom-24 right-4 px-3 py-2 rounded-full bg-emerald-600 text-white text-sm shadow-lg">
+    🔊 Ativar música
+  </button>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-white/80 glass soft-shadow">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+      <img src="minha_foto.jpg" alt="Wendell Felipe" class="mini-foto" loading="eager" />
+      <div class="flex-1">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl font-extrabold tracking-tight">Wendell Felipe</span>
+          <span class="px-2 py-0.5 text-xs rounded-full bg-emerald-200/80 font-semibold text-emerald-900">Eletricista Profissional</span>
+          <span class="px-2 py-0.5 text-xs rounded-full bg-emerald-600/10 text-emerald-700">24h</span>
+        </div>
+        <p class="text-sm text-slate-600">Instalações • Manutenções • Emergências • São Paulo e região</p>
+      </div>
+      <nav class="hidden md:flex gap-5 text-sm font-medium">
+        <a href="#servicos" class="hover:text-emerald-700">Serviços</a>
+        <a href="#avaliacoes" class="hover:text-emerald-700">Avaliações</a>
+        <a href="#precos" class="hover:text-emerald-700">Preços</a>
+        <a href="#pagamento" class="hover:text-emerald-700">Pagamento</a>
+        <a href="#contato" class="hover:text-emerald-700">Contato</a>
+      </nav>
+      <div class="flex gap-2">
+        <a href="#contato" class="px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-500 soft-shadow">Chamar agora</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-emerald-50 via-white to-slate-100"></div>
+    <div class="max-w-6xl mx-auto px-4 py-14 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Atendimento elétrico
+          <span class="text-emerald-600">rápido e seguro</span></h1>
+        <p class="mt-4 text-lg text-slate-600">Orçamento pelo WhatsApp em minutos. Pagamento via PIX com QR Code. Garantia e nota fiscal.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#pagamento" class="px-6 py-3 rounded-2xl bg-emerald-600 font-bold text-white hover:bg-emerald-500 soft-shadow">Pagar/Agendar</a>
+          <a href="#precos" class="px-6 py-3 rounded-2xl border border-slate-300 hover:border-emerald-500 hover:text-emerald-700">Ver preços</a>
+        </div>
+        <div class="mt-6 flex items-center gap-3 text-sm text-slate-600">
+          <span id="badgeStatus" class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">
+            <i data-lucide="wifi" class="w-4 h-4"></i>
+            <span>Online agora</span>
+          </span>
+          <span>Tempo médio de resposta: <strong>&lt; 10 min</strong></span>
+        </div>
+      </div>
+      <div class="relative">
+        <img src="minha_foto.jpg" alt="Wendell Felipe eletricista" class="w-full max-w-md mx-auto rounded-3xl ring-electric soft-shadow" loading="eager" />
+        <div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl soft-shadow border border-emerald-200">
+          <p class="text-sm"><span class="font-bold">Disponibilidade hoje:</span> 08:00–20:00</p>
+          <p class="text-xs text-slate-500">Emergências 24h</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destaques -->
+  <section class="py-6 border-y bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <div class="p-3 rounded-xl bg-slate-50">✅ Garantia 90 dias</div>
+      <div class="p-3 rounded-xl bg-slate-50">🧾 Nota fiscal</div>
+      <div class="p-3 rounded-xl bg-slate-50">🛡️ Seguro obra</div>
+      <div class="p-3 rounded-xl bg-slate-50">⭐ 4.9/5 clientes</div>
+    </div>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" class="py-14 bg-gradient-to-b from-white to-slate-100">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-extrabold">Serviços mais pedidos</h2>
+      <p class="text-slate-600 mt-2">Instalações residenciais, comerciais e emergenciais.</p>
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-white soft-shadow border border-slate-100">
+          <h3 class="font-bold text-lg">Troca de disjuntores</h3>
+          <p class="text-sm text-slate-600">Quadro padrão, identificação e balanceamento.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white soft-shadow border border-slate-100">
+          <h3 class="font-bold text-lg">Instalação de chuveiro</h3>
+          <p class="text-sm text-slate-600">Cabeamento correto e disjuntor dedicado.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white soft-shadow border border-slate-100">
+          <h3 class="font-bold text-lg">Iluminação e tomadas</h3>
+          <p class="text-sm text-slate-600">Spots, pendentes, fitas de LED.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white soft-shadow border border-slate-100">
+          <h3 class="font-bold text-lg">Padrão concessionária</h3>
+          <p class="text-sm text-slate-600">Entrada, aterramento e SPDA.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white soft-shadow border border-slate-100">
+          <h3 class="font-bold text-lg">Laudo e vistoria</h3>
+          <p class="text-sm text-slate-600">ABNT NBR 5410 e NR10.</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white soft-shadow border border-slate-100">
+          <h3 class="font-bold text-lg">Emergência 24h</h3>
+          <p class="text-sm text-slate-600">Curto, queda de fase e sobrecarga.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preços detalhados (base Engehall) -->
+  <section id="precos" class="py-14 bg-gradient-to-b from-slate-100 to-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-extrabold">Tabela de preços detalhada</h2>
+      <p class="text-slate-600 mt-2">Faixas de preço de referência (mín/médio/máx). O valor final é confirmado após avaliação no local.</p>
+
+      <!-- Categorias -->
+      <div class="mt-8 space-y-8">
+
+        <!-- Residencial -->
+        <div class="bg-white rounded-2xl border soft-shadow overflow-hidden">
+          <div class="px-5 py-3 bg-emerald-50 border-b"><strong>Residencial</strong></div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full price-grid">
+              <thead class="bg-slate-50 text-left text-sm">
+                <tr>
+                  <th class="px-4 py-3">Serviço</th>
+                  <th class="px-4 py-3">Descrição</th>
+                  <th class="px-4 py-3">Mín</th>
+                  <th class="px-4 py-3">Médio</th>
+                  <th class="px-4 py-3">Máx</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr><td class="px-4 py-3">Curto-circuito (monofásico)</td><td class="px-4 py-3">Diagnóstico e correção simples</td><td class="px-4 py-3">R$ 120</td><td class="px-4 py-3">R$ 150</td><td class="px-4 py-3">R$ 220</td></tr>
+                <tr><td class="px-4 py-3">Curto-circuito (bifásico)</td><td class="px-4 py-3">Inspeção quadro e circuitos</td><td class="px-4 py-3">R$ 150</td><td class="px-4 py-3">R$ 180</td><td class="px-4 py-3">R$ 260</td></tr>
+                <tr><td class="px-4 py-3">Troca de disjuntor mono</td><td class="px-4 py-3">Inclui teste de carga</td><td class="px-4 py-3">R$ 50</td><td class="px-4 py-3">R$ 60</td><td class="px-4 py-3">R$ 80</td></tr>
+                <tr><td class="px-4 py-3">Troca de disjuntor bi</td><td class="px-4 py-3">Curva C/D conforme projeto</td><td class="px-4 py-3">R$ 60</td><td class="px-4 py-3">R$ 70</td><td class="px-4 py-3">R$ 100</td></tr>
+                <tr><td class="px-4 py-3">Instalação de tomada</td><td class="px-4 py-3">Ponto novo até 10m</td><td class="px-4 py-3">R$ 90</td><td class="px-4 py-3">R$ 120</td><td class="px-4 py-3">R$ 180</td></tr>
+                <tr><td class="px-4 py-3">Ponto de iluminação</td><td class="px-4 py-3">Pendente/spot com comutação</td><td class="px-4 py-3">R$ 80</td><td class="px-4 py-3">R$ 120</td><td class="px-4 py-3">R$ 200</td></tr>
+                <tr><td class="px-4 py-3">Chuveiro elétrico</td><td class="px-4 py-3">Instalação/cabeamento/dj dedicado</td><td class="px-4 py-3">R$ 120</td><td class="px-4 py-3">R$ 180</td><td class="px-4 py-3">R$ 300</td></tr>
+                <tr><td class="px-4 py-3">Interfone/campainha</td><td class="px-4 py-3">Instalação/ajuste de fiação</td><td class="px-4 py-3">R$ 90</td><td class="px-4 py-3">R$ 140</td><td class="px-4 py-3">R$ 220</td></tr>
+                <tr><td class="px-4 py-3">Ventilador de teto</td><td class="px-4 py-3">Instalação balanceada</td><td class="px-4 py-3">R$ 120</td><td class="px-4 py-3">R$ 180</td><td class="px-4 py-3">R$ 280</td></tr>
+                <tr><td class="px-4 py-3">Aterramento residencial</td><td class="px-4 py-3">Haste, conector e medição</td><td class="px-4 py-3">R$ 350</td><td class="px-4 py-3">R$ 550</td><td class="px-4 py-3">R$ 900</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Predial/Comercial -->
+        <div class="bg-white rounded-2xl border soft-shadow overflow-hidden">
+          <div class="px-5 py-3 bg-emerald-50 border-b"><strong>Predial / Comercial</strong></div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full price-grid">
+              <thead class="bg-slate-50 text-left text-sm">
+                <tr>
+                  <th class="px-4 py-3">Serviço</th>
+                  <th class="px-4 py-3">Descrição</th>
+                  <th class="px-4 py-3">Mín</th>
+                  <th class="px-4 py-3">Médio</th>
+                  <th class="px-4 py-3">Máx</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr><td class="px-4 py-3">Quadro de distribuição</td><td class="px-4 py-3">Reorganização e identificação</td><td class="px-4 py-3">R$ 450</td><td class="px-4 py-3">R$ 700</td><td class="px-4 py-3">R$ 1.200</td></tr>
+                <tr><td class="px-4 py-3">Circuito dedicado</td><td class="px-4 py-3">Ar‑cond., forno, data center</td><td class="px-4 py-3">R$ 300</td><td class="px-4 py-3">R$ 520</td><td class="px-4 py-3">R$ 900</td></tr>
+                <tr><td class="px-4 py-3">Padrão entrada (ENEL/CPFL)</td><td class="px-4 py-3">Adequação a normas</td><td class="px-4 py-3">R$ 800</td><td class="px-4 py-3">R$ 1.200</td><td class="px-4 py-3">R$ 2.000</td></tr>
+                <tr><td class="px-4 py-3">SPDA (para‑raios)</td><td class="px-4 py-3">Inspeção/ensaios/relatório</td><td class="px-4 py-3">R$ 1.200</td><td class="px-4 py-3">R$ 2.000</td><td class="px-4 py-3">R$ 3.500</td></tr>
+                <tr><td class="px-4 py-3">Correção de fator de potência</td><td class="px-4 py-3">Banco de capacitores</td><td class="px-4 py-3">R$ 900</td><td class="px-4 py-3">R$ 1.600</td><td class="px-4 py-3">R$ 3.000</td></tr>
+                <tr><td class="px-4 py-3">Iluminação comercial</td><td class="px-4 py-3">Projeto/executivo por ponto</td><td class="px-4 py-3">R$ 120</td><td class="px-4 py-3">R$ 180</td><td class="px-4 py-3">R$ 280</td></tr>
+                <tr><td class="px-4 py-3">Laudo NR10 / NBR5410</td><td class="px-4 py-3">Vistoria + ART</td><td class="px-4 py-3">R$ 900</td><td class="px-4 py-3">R$ 1.500</td><td class="px-4 py-3">R$ 2.500</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Industrial -->
+        <div class="bg-white rounded-2xl border soft-shadow overflow-hidden">
+          <div class="px-5 py-3 bg-emerald-50 border-b"><strong>Industrial</strong></div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full price-grid">
+              <thead class="bg-slate-50 text-left text-sm">
+                <tr>
+                  <th class="px-4 py-3">Serviço</th>
+                  <th class="px-4 py-3">Descrição</th>
+                  <th class="px-4 py-3">Mín</th>
+                  <th class="px-4 py-3">Médio</th>
+                  <th class="px-4 py-3">Máx</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr><td class="px-4 py-3">QGBT / QGD montagem</td><td class="px-4 py-3">Barramentos, disjuntores, testes</td><td class="px-4 py-3">R$ 2.500</td><td class="px-4 py-3">R$ 4.500</td><td class="px-4 py-3">R$ 8.000</td></tr>
+                <tr><td class="px-4 py-3">Leito e eletrocalha</td><td class="px-4 py-3">Por metro com fixação</td><td class="px-4 py-3">R$ 45</td><td class="px-4 py-3">R$ 65</td><td class="px-4 py-3">R$ 110</td></tr>
+                <tr><td class="px-4 py-3">Cabeamento força</td><td class="px-4 py-3">Por metro e seção</td><td class="px-4 py-3">R$ 18</td><td class="px-4 py-3">R$ 28</td><td class="px-4 py-3">R$ 45</td></tr>
+                <tr><td class="px-4 py-3">Motorização/partida</td><td class="px-4 py-3">Direta/soft starter/inversor</td><td class="px-4 py-3">R$ 900</td><td class="px-4 py-3">R$ 1.600</td><td class="px-4 py-3">R$ 3.200</td></tr>
+                <tr><td class="px-4 py-3">Instrumentação</td><td class="px-4 py-3">Loop check/commissioning</td><td class="px-4 py-3">R$ 1.200</td><td class="px-4 py-3">R$ 2.000</td><td class="px-4 py-3">R$ 4.000</td></tr>
+                <tr><td class="px-4 py-3">SPDA industrial</td><td class="px-4 py-3">Projetos e medições</td><td class="px-4 py-3">R$ 2.000</td><td class="px-4 py-3">R$ 3.500</td><td class="px-4 py-3">R$ 6.000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Emergência 24h -->
+        <div class="bg-white rounded-2xl border-2 border-emerald-300 soft-shadow overflow-hidden">
+          <div class="px-5 py-3 bg-emerald-100 border-b flex items-center gap-2"><i data-lucide="alarm-check" class="w-5 h-5"></i><strong>Emergência 24h</strong></div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full price-grid">
+              <thead class="bg-slate-50 text-left text-sm">
+                <tr>
+                  <th class="px-4 py-3">Serviço</th>
+                  <th class="px-4 py-3">Descrição</th>
+                  <th class="px-4 py-3">Atendimento</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm">
+                <tr><td class="px-4 py-3">Curto-circuito geral</td><td class="px-4 py-3">Restauração rápida com segurança</td><td class="px-4 py-3">A partir de R$ 180</td></tr>
+                <tr><td class="px-4 py-3">Queda de fase</td><td class="px-4 py-3">Balanceamento e correção</td><td class="px-4 py-3">A partir de R$ 220</td></tr>
+                <tr><td class="px-4 py-3">Sobrecarga/aquecimento</td><td class="px-4 py-3">Medição e alívio de carga</td><td class="px-4 py-3">A partir de R$ 220</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pagamento via PIX (QR fixo + WhatsApp) -->
+  <section id="pagamento" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
+      <div class="p-6 rounded-2xl border soft-shadow bg-slate-50">
+        <h2 class="text-2xl font-extrabold flex items-center gap-2">Pagamento via PIX <i data-lucide="qr-code" class="w-5 h-5"></i></h2>
+        <p class="text-slate-600 mt-2">Escaneie o QR Code para pagar diretamente. Depois, confirme no WhatsApp para agilizar o agendamento.</p>
+        <div class="mt-6 text-center">
+          <img src="qr-pix.jpg" alt="QR Code PIX Wendell Felipe" class="inline-block rounded-xl border soft-shadow" width="260" height="260" loading="lazy" />
+          <p class="mt-3 text-sm text-slate-600">Chave PIX (telefone): <strong>+55 11 98128-6290</strong></p>
+          <a id="pixConfirm" target="_blank" class="mt-4 inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-emerald-600 text-white font-bold hover:bg-emerald-500 soft-shadow">
+            <i data-lucide="message-circle"></i>
+            Confirmar pagamento no WhatsApp
+          </a>
+          <p class="mt-2 text-xs text-slate-500">Se preferir, envie o comprovante por WhatsApp.</p>
+        </div>
+      </div>
+
+      <!-- Contato -->
+      <div id="contato" class="p-6 rounded-2xl border soft-shadow bg-white">
+        <h2 class="text-2xl font-extrabold">Fale comigo</h2>
+        <p class="text-slate-600 mt-2">Preencha que eu retorno rapidinho.</p>
+        <form id="formContato" class="mt-6 grid gap-3">
+          <div>
+            <label class="text-sm text-slate-600">Seu nome</label>
+            <input required name="nome" class="w-full mt-1 px-3 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">WhatsApp</label>
+            <input required name="whats" placeholder="(11) 9 9999-9999" class="w-full mt-1 px-3 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-emerald-400" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">O que precisa?</label>
+            <textarea required name="mensagem" rows="4" class="w-full mt-1 px-3 py-2 rounded-xl border focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Ex.: trocar disjuntor, instalar chuveiro, curto..."></textarea>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button class="px-6 py-3 rounded-2xl bg-slate-900 text-white hover:bg-slate-800" type="submit">Enviar</button>
+            <a id="btnWhats" target="_blank" rel="noopener" class="px-6 py-3 rounded-2xl bg-emerald-600 text-white hover:bg-emerald-500" href="#">WhatsApp</a>
+          </div>
+          <p id="contatoOk" class="hidden text-emerald-700 text-sm">Mensagem registrada! Se preferir, me chame no WhatsApp.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Avaliações -->
+  <section id="avaliacoes" class="py-14 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-extrabold">O que os clientes dizem</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <figure class="p-6 rounded-2xl bg-slate-50 border soft-shadow">
+          <blockquote class="text-slate-700">“Chegou rápido e resolveu o curto em menos de 1 hora. Recomendo!”</blockquote>
+          <figcaption class="mt-3 text-sm text-slate-500">— Camila, Vila Mariana</figcaption>
+        </figure>
+        <figure class="p-6 rounded-2xl bg-slate-50 border soft-shadow">
+          <blockquote class="text-slate-700">“Instalou todo o projeto de iluminação do meu escritório. Serviço limpo.”</blockquote>
+          <figcaption class="mt-3 text-sm text-slate-500">— Diego, Moema</figcaption>
+        </figure>
+        <figure class="p-6 rounded-2xl bg-slate-50 border soft-shadow">
+          <blockquote class="text-slate-700">“Preço justo e garantia. Voltarei a contratar.”</blockquote>
+          <figcaption class="mt-3 text-sm text-slate-500">— Priscila, Tatuapé</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-slate-900 text-slate-100">
+    <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="minha_foto.jpg" alt="Foto" class="w-10 h-10 rounded-full border-2 border-emerald-400" />
+          <span class="font-bold">Wendell Felipe</span>
+        </div>
+        <p class="text-sm mt-3 text-slate-300">CNPJ 00.000.000/0001-00 • CREA/NR10 OK</p>
+      </div>
+      <div>
+        <h4 class="font-bold mb-2">Contato</h4>
+        <p class="text-sm text-slate-300">📞 <a class="underline" href="tel:+5511981286290">(11) 98128-6290</a></p>
+        <p class="text-sm text-slate-300">💬 <a class="underline" target="_blank" rel="noopener" id="footerWhats" href="#">WhatsApp</a></p>
+        <p class="text-sm text-slate-300">✉️ <a class="underline" href="mailto:contato@wendelleletrica.com">contato@wendelleletrica.com</a></p>
+      </div>
+      <div>
+        <h4 class="font-bold mb-2">Atendimento</h4>
+        <p class="text-sm text-slate-300">Seg–Sex 08:00–20:00 • Emergências 24h</p>
+        <p class="text-sm text-slate-300">São Paulo e região metropolitana</p>
+      </div>
+    </div>
+    <div class="text-center text-xs text-slate-400 pb-6">© <span id="ano"></span> Wendell Felipe. Todos os direitos reservados.</div>
+  </footer>
+
+  <!-- Chat flutuante (abre WhatsApp com a mensagem digitada) -->
+  <button id="chatBtn" class="fixed z-[60] bottom-4 right-4 w-14 h-14 rounded-full bg-emerald-600 text-white shadow-2xl flex items-center justify-center hover:bg-emerald-500 pulse" aria-label="Abrir chat">
+    <i data-lucide="message-circle" class="w-6 h-6"></i>
+  </button>
+  <div id="chatBox" class="hidden fixed z-[60] bottom-20 right-4 w-80 max-w-[92vw] bg-white rounded-2xl border soft-shadow overflow-hidden">
+    <div class="px-4 py-3 bg-emerald-600 text-white flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i data-lucide="zap" class="w-5 h-5"></i>
+        <strong>Fale com Wendell</strong>
+      </div>
+      <button id="chatClose" class="opacity-80 hover:opacity-100" aria-label="Fechar">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="p-3 space-y-2 text-sm">
+      <input id="chatNome" class="w-full px-3 py-2 rounded-xl border" placeholder="Seu nome" />
+      <textarea id="chatMsg" rows="3" class="w-full px-3 py-2 rounded-xl border" placeholder="Escreva sua mensagem..."></textarea>
+      <button id="chatSend" class="w-full px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-500">Enviar no WhatsApp</button>
+      <p class="text-[11px] text-slate-500">Ao clicar, o WhatsApp Web/app abre com sua mensagem preenchida para <strong>(11) 98128‑6290</strong>.</p>
+    </div>
+  </div>
+
+  <!-- Sticky CTA WhatsApp -->
+  <div class="sticky-cta bg-white/90 border-t soft-shadow">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+      <span class="text-sm">Precisa agora? Atendimento 24h.</span>
+      <a id="ctaWhats" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-500">Chamar no WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    const SEU_WHATS = '5511981286290';
+    const WHATS_BASE = `https://wa.me/${SEU_WHATS}?text=`;
+
+    function buildWhatsMsg(msg){ return WHATS_BASE + encodeURIComponent(msg); }
+
+    // Status e rodapé
+    const agora = new Date();
+    document.getElementById('ano').textContent = agora.getFullYear();
+    const hora = agora.getHours();
+    const online = (hora >= 8 && hora < 20);
+    const badge = document.getElementById('badgeStatus');
+    if(!online){
+      badge.classList.remove('bg-emerald-100','text-emerald-800');
+      badge.classList.add('bg-slate-200','text-slate-700');
+      badge.querySelector('span').textContent = 'Fora do horário — respondo já já';
+    }
+
+    // WhatsApp links (com mensagem padrão urgente)
+    const mensagemPadrao = 'Olá, acabei de visitar seu site e preciso de um orçamento urgente.';
+    document.getElementById('footerWhats').href = buildWhatsMsg(mensagemPadrao);
+    document.getElementById('ctaWhats').href = buildWhatsMsg(mensagemPadrao);
+    document.getElementById('pixConfirm').href = buildWhatsMsg('Olá! Acabei de pagar via PIX. Podemos agendar?');
+
+    // Form de contato -> WhatsApp
+    const formContato = document.getElementById('formContato');
+    const btnWhats = document.getElementById('btnWhats');
+    formContato.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(formContato));
+      const texto = `Olá, sou ${data.nome} (${data.whats}). Preciso: ${data.mensagem}`;
+      btnWhats.href = buildWhatsMsg(texto);
+      window.open(btnWhats.href, '_blank');
+      document.getElementById('contatoOk').classList.remove('hidden');
+      formContato.reset();
+    });
+
+    // Chat flutuante
+    const chatBtn = document.getElementById('chatBtn');
+    const chatBox = document.getElementById('chatBox');
+    const chatClose = document.getElementById('chatClose');
+    const chatSend = document.getElementById('chatSend');
+    chatBtn.addEventListener('click', ()=> chatBox.classList.toggle('hidden'));
+    chatClose.addEventListener('click', ()=> chatBox.classList.add('hidden'));
+    chatSend.addEventListener('click', ()=>{
+      const nome = (document.getElementById('chatNome').value||'').trim();
+      const msg = (document.getElementById('chatMsg').value||'').trim();
+      const texto = (msg ? (nome ? `Olá, sou ${nome}. ${msg}` : msg) : mensagemPadrao);
+      window.open(buildWhatsMsg(texto), '_blank');
+    });
+
+    // Música: tentar ativar áudio do YouTube (navegadores exigem interação para som); mostrar botão para ativar
+    const btnSom = document.getElementById('btnSom');
+    // Ao primeiro click/croll/tecla, tentar ativar o som removendo mute
+    let somAtivado = false;
+    function habilitarSom(){
+      if(somAtivado) return;
+      const iframe = document.getElementById('ytbg');
+      // Troca para autoplay sem mute ao interagir
+      const src = new URL(iframe.src);
+      src.searchParams.set('mute','0');
+      iframe.src = src.toString();
+      somAtivado = true;
+      btnSom.classList.add('hidden');
+      window.removeEventListener('click', habilitarSom);
+      window.removeEventListener('keydown', habilitarSom);
+      window.removeEventListener('scroll', habilitarSom);
+    }
+    window.addEventListener('click', habilitarSom, { once:false });
+    window.addEventListener('keydown', habilitarSom, { once:false });
+    window.addEventListener('scroll', habilitarSom, { once:false });
+    // Botão explícito
+    btnSom.addEventListener('click', habilitarSom);
+
+    // Mostrar botão se o navegador bloquear som por padrão
+    setTimeout(()=>{ btnSom.classList.remove('hidden'); }, 1200);
+  </script>
+</body>
+</html>
